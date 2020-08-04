@@ -1,3 +1,3 @@
 class RedditService
 
-end  
+end
