@@ -15,4 +15,12 @@ class Sub < ApplicationRecord
   def top_comments(amt)
     comments.order(score: :desc).limit(amt)
   end
+
+  def negative_posts(amt)
+    posts.where('score < ?', 0).limit(amt)
+  end
+
+  def negative_comments(amt)
+    comments.where('score < ?', 0).limit(amt)
+  end
 end
