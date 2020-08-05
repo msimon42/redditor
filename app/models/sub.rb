@@ -11,4 +11,8 @@ class Sub < ApplicationRecord
   def top_posts(amt)
     posts.order(score: :desc).limit(amt)
   end
+
+  def top_comments(amt)
+    comments.order(score: :desc).limit(amt)
+  end
 end
