@@ -7,12 +7,18 @@ class RedditService
     posts = @r.browse(sub)
     comments = Array.new
 
-    posts.each{|post| comments << post.comments}
+    posts.each do |post|
+      begin
+        comments << post.comments
+      rescue
+      end    
+    end
+
     comments.flatten!
 
     {
       posts: posts,
-      comments: comments 
+      comments: comments
     }
   end
 end
