@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_020546) do
+ActiveRecord::Schema.define(version: 2020_08_05_221242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_08_05_020546) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "author"
     t.integer "score"
+    t.string "submission_id"
     t.index ["sub_id"], name: "index_comments_on_sub_id"
   end
 
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_08_05_020546) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "author"
     t.integer "score"
+    t.string "submission_id"
     t.index ["sub_id"], name: "index_posts_on_sub_id"
   end
 
