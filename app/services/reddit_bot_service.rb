@@ -10,4 +10,8 @@ class RedditBotService
       password:   ENV['REDDIT_PASSWORD']
       )
   end
+
+  def vote_by_fullname(fullname, dir)
+    @session.from_ids(fullname).to_ary[0].send(dir)
+  end
 end
