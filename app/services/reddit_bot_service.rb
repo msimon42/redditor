@@ -1,4 +1,6 @@
 class RedditBotService
+  attr_reader :session
+
   def initialize
     @session = Redd.it(
       user_agent: 'RedditorMan:v1',
