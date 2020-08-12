@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'ruby_reddit_api', '~> 0.2.6'
 gem "figaro"
+gem 'redd'
 
 
 group :development, :test do
