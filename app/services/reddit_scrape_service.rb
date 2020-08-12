@@ -1,4 +1,4 @@
-class RedditService
+class RedditScrapeService
   def initialize
     @r = Reddit::Api.new(ENV['REDDIT_USERNAME'], ENV['REDDIT_PASSWORD'])
   end
@@ -11,7 +11,7 @@ class RedditService
       begin
         comments << post.comments
       rescue
-      end    
+      end
     end
 
     comments.flatten!
