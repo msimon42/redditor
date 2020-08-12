@@ -6,6 +6,6 @@ class RedditBotService
       secret:     ENV['REDDIT_CLIENT_SECRET'],
       username:   ENV['REDDIT_USERNAME'],
       password:   ENV['REDDIT_PASSWORD']
-)
+      )
   end
 end
