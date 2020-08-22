@@ -14,4 +14,12 @@ class RedditBotService
   def vote_by_fullname(fullname, dir)
     @session.from_ids(fullname).to_ary[0].send(dir)
   end
+
+  def reply_to_submission(fullname, text)
+    @session.from_ids(fullname).first.reply(text)
+  end
+
+  def make_post(sub, **kwargs)
+    @session.subreddit(sub).submit(kwargs[:title], kwargs[:text], kwargs[:url])
+  end
 end

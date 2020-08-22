@@ -27,4 +27,8 @@ class Sub < ApplicationRecord
   def negative_comments(amt)
     comments.where('score < ?', 0).limit(amt)
   end
+
+  def post(**kwargs)
+    RedditBotService.new.make_post(self.name, title: kwargs[:title], text: kwargs[:text], url: kwargs[:url])
+  end
 end

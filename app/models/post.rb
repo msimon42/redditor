@@ -7,5 +7,9 @@ class Post < ApplicationRecord
 
   def downvote
     RedditBotService.new.vote_by_fullname(self.submission_id, 'downvote')
-  end   
+  end
+
+  def reply(text)
+    RedditBotService.new.reply_to_submission(self.submission_id, text)
+  end
 end
