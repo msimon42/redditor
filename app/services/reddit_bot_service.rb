@@ -1,13 +1,14 @@
 class RedditBotService
   attr_reader :session
 
-  def initialize
+  def initialize(user=nil)
+    @user = user || Bot.random
     @session = Redd.it(
       user_agent: 'RedditorMan:v1',
       client_id:  ENV['REDDIT_CLIENT_ID'],
       secret:     ENV['REDDIT_CLIENT_SECRET'],
-      username:   ENV['REDDIT_USERNAME'],
-      password:   ENV['REDDIT_PASSWORD']
+      username:   @user.username,
+      password:   @user.password
       )
   end
 
@@ -21,5 +22,9 @@ class RedditBotService
 
   def make_post(sub, **kwargs)
     @session.subreddit(sub).submit(kwargs[:title], kwargs[:text], kwargs[:url])
+  end
+
+  def subscribe(sub)
+    @session.subreddit(sub).subscribe
   end
 end
