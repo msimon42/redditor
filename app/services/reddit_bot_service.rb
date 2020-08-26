@@ -27,4 +27,14 @@ class RedditBotService
   def subscribe(sub)
     @session.subreddit(sub).subscribe
   end
+
+  def reset
+    @session = Redd.it(
+      user_agent: 'RedditorMan:v1',
+      client_id:  ENV['REDDIT_CLIENT_ID'],
+      secret:     ENV['REDDIT_CLIENT_SECRET'],
+      username:   @user.username,
+      password:   @user.password
+      )
+  end
 end

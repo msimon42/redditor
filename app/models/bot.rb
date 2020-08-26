@@ -7,4 +7,8 @@ class Bot < ApplicationRecord
   def subscribe_to_sub(sub)
     RedditBotService.new(self).subscribe(sub)
   end
+
+  def login
+    RedditBotService.new(self)
+  end
 end
