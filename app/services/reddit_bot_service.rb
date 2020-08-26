@@ -4,7 +4,7 @@ class RedditBotService
   def initialize(user=nil)
     @user = user || Bot.random
     @session = Redd.it(
-      user_agent: 'RedditorMan:v1',
+      user_agent: @user.user_agent,
       client_id:  ENV['REDDIT_CLIENT_ID'],
       secret:     ENV['REDDIT_CLIENT_SECRET'],
       username:   @user.username,
