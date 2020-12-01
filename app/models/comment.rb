@@ -12,4 +12,8 @@ class Comment < ApplicationRecord
   def reply(text)
     RedditBotService.new.reply_to_submission(self.submission_id, text)
   end
+
+  def tokenize
+    text.split.uniq
+  end
 end
