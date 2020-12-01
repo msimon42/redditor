@@ -28,8 +28,20 @@ class Sub < ApplicationRecord
     comments.where('score < ?', 0).limit(amt)
   end
 
+  def non_nil_comments
+    comments.pluck(:text).reject!{|comment| comment.nil?}
+  end
+
   def post(**kwargs)
     RedditBotService.new.make_post(self.name, title: kwargs[:title], text: kwargs[:text], url: kwargs[:url])
+  end
+
+  def comment_word_count
+    counter = Hash.new(0)
+    non_nil_comments.flat_map{|text| text.split}.each do |word|
+      counter[word] += 1
+    end
+    return counter
   end
 
   def self.crypto
