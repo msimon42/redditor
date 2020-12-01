@@ -31,4 +31,8 @@ class Sub < ApplicationRecord
   def post(**kwargs)
     RedditBotService.new.make_post(self.name, title: kwargs[:title], text: kwargs[:text], url: kwargs[:url])
   end
+
+  def self.crypto
+    where(crypto: true)
+  end
 end
