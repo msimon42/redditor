@@ -14,6 +14,8 @@ class Comment < ApplicationRecord
   end
 
   def tokenize
-    text.split.uniq
+    text.gsub(/[,.$#@!%&*]/, '')
+        .split
+        .uniq
   end
 end
