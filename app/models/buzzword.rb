@@ -8,7 +8,7 @@ class Buzzword < ApplicationRecord
       """
     )
 
-    
+    values.sum{|v| v['value']}
   end
 
   private
