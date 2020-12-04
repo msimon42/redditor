@@ -36,6 +36,13 @@ class Sub < ApplicationRecord
     RedditBotService.new.make_post(self.name, title: kwargs[:title], text: kwargs[:text], url: kwargs[:url])
   end
 
+  def tokenize_comments(days)
+    cmmnts = comments.where('created_at > ?', days.days_ago)
+                     .map{&:tokenize}
+
+
+  end
+
   def comment_word_count
     counter = Hash.new(0)
     non_nil_comments.flat_map{|text| text.split}.each do |word|
