@@ -13,6 +13,6 @@ class Buzzword < ApplicationRecord
 
   private
     def self.convert_to_like(list)
-      list.map{ |word| "word = '#{word}'"  }.join(' OR ')
+      list.map{ |word| %Q[word = '#{word}'] }.join(' OR ')
     end
 end
