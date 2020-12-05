@@ -37,10 +37,9 @@ class Sub < ApplicationRecord
   end
 
   def tokenize_comments(days)
-    cmmnts = comments.where('created_at > ?', days.days_ago)
-                     .map{&:tokenize}
-
-
+    cmmnts = comments.not_nil
+                     .where('created_at > ?', days.days.ago)
+                     .map(&:tokenize)
   end
 
   def comment_word_count
