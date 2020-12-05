@@ -17,7 +17,7 @@ class Timer
     if @start_time
       end_count = count
       @start_time = nil
-      return count
+      return end_count
     end
     raise start_error
   end
