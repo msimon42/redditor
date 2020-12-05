@@ -53,4 +53,12 @@ class Sub < ApplicationRecord
   def self.crypto
     where(crypto: true)
   end
+
+  def self.crypto_sentiment_score(days)
+    score = crypto.sum do |sub|
+      c = sub.tokenize_comments(days)
+      c.sum{ |words| Buzzword.get_score(words)  }
+    end
+    return score
+  end
 end
