@@ -14,8 +14,12 @@ class Comment < ApplicationRecord
   end
 
   def tokenize
-    text.gsub(/[,.$#@!%&*]/, '')
+    text.gsub(/[,.$#@!%&*']/, '')
         .split
         .uniq
+  end
+
+  def self.not_nil
+    where.not(text: nil)
   end
 end
