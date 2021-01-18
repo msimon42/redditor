@@ -1,4 +1,7 @@
 class Bot < ApplicationRecord
+  def initialize
+    @session ||= RedditBotService.new(self)
+  end
 
   def self.random
     order('RANDOM()').first
@@ -8,7 +11,12 @@ class Bot < ApplicationRecord
     RedditBotService.new(self).subscribe(sub)
   end
 
+  #depricated
   def login
     RedditBotService.new(self)
+  end
+
+  def subscribed_subs
+    @session.my_subreddits('subscriber').map{|s| s.display_name}
   end
 end
