@@ -28,7 +28,37 @@ class Sub < ApplicationRecord
     comments.where('score < ?', 0).limit(amt)
   end
 
+  def non_nil_comments
+    comments.pluck(:text).reject!{|comment| comment.nil?}
+  end
+
   def post(**kwargs)
     RedditBotService.new.make_post(self.name, title: kwargs[:title], text: kwargs[:text], url: kwargs[:url])
+  end
+
+  def tokenize_comments(days)
+    cmmnts = comments.not_nil
+                     .where('created_at > ?', days.days.ago)
+                     .map(&:tokenize)
+  end
+
+  def comment_word_count
+    counter = Hash.new(0)
+    non_nil_comments.flat_map{|text| text.split}.each do |word|
+      counter[word] += 1
+    end
+    return counter
+  end
+
+  def self.crypto
+    where(crypto: true)
+  end
+
+  def self.crypto_sentiment_score(days)
+    score = crypto.sum do |sub|
+      c = sub.tokenize_comments(days)
+      c.sum{ |words| Buzzword.get_score(words)  }
+    end
+    return score
   end
 end

@@ -12,4 +12,14 @@ class Comment < ApplicationRecord
   def reply(text)
     RedditBotService.new.reply_to_submission(self.submission_id, text)
   end
+
+  def tokenize
+    text.gsub(/[,.$#@!%&*'?)(%"<>"]/, '')
+        .split
+        .uniq
+  end
+
+  def self.not_nil
+    where.not(text: nil)
+  end
 end
