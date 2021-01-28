@@ -10,6 +10,7 @@ class RedditBotService
       username:   @user.username,
       password:   @user.password
       )
+
   end
 
   def vote_by_fullname(fullname, dir)
@@ -28,13 +29,14 @@ class RedditBotService
     @session.subreddit(sub).subscribe
   end
 
-  def reset
+  def reset(usr=nil)
+    user = usr || @user
     @session = Redd.it(
       user_agent: 'RedditorMan:v1',
       client_id:  ENV['REDDIT_CLIENT_ID'],
       secret:     ENV['REDDIT_CLIENT_SECRET'],
-      username:   @user.username,
-      password:   @user.password
+      username:   user.username,
+      password:   user.password
       )
   end
 end
