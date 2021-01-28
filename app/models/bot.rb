@@ -20,7 +20,7 @@ class Bot < ApplicationRecord
     @session.my_subreddits('subscriber').map{|s| s.display_name}
   end
 
-  def self.mass_vote(post)
+  def self.mass_vote(dir, post)
     all.each do |bot|
       session = bot.login
       session.vote_by_fullname(self.submission_id, dir)
