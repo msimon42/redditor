@@ -10,6 +10,7 @@ class RedditBotService
       username:   @user.username,
       password:   @user.password
       )
+    @user_data = @session.user(@user.username)
 
   end
 
@@ -29,9 +30,12 @@ class RedditBotService
     @session.subreddit(sub).subscribe
   end
 
-  def user_score(user)
-
-  end  
+  def user_score
+    return {
+      comment_karma: @user_data.comment_karma,
+      link_karma: @user_data.link_karma
+    }
+  end
 
   def reset(usr=nil)
     user = usr || @user
