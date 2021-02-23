@@ -8,7 +8,7 @@ class Bot < ApplicationRecord
   end
 
   def subscribe_to_sub(sub)
-    RedditBotService.new(self).subscribe(sub)
+    @session.subscribe(sub)
   end
 
   #depricated
@@ -26,4 +26,8 @@ class Bot < ApplicationRecord
       session.vote_by_fullname(self.submission_id, dir)
     end
   end
+
+  def update_score
+
+  end  
 end
