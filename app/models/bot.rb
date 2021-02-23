@@ -1,7 +1,5 @@
 class Bot < ApplicationRecord
-  def initialize
-    @session ||= RedditBotService.new(self)
-  end
+  after_find :login
 
   def self.random
     order('RANDOM()').first
@@ -9,11 +7,6 @@ class Bot < ApplicationRecord
 
   def subscribe_to_sub(sub)
     @session.subscribe(sub)
-  end
-
-  #depricated
-  def login
-    RedditBotService.new(self)
   end
 
   def subscribed_subs
@@ -28,12 +21,17 @@ class Bot < ApplicationRecord
   end
 
   def update_score
-    scores = @session.user_score(self.username)
+    scores = @session.user_score
     update(link_karma: scores[:link_karma], comment_karma: scores[:comment_karma])
-    return score
+    return scores
   end
 
   def total_karma
     return link_karma + comment_karma
   end
+
+  private
+    def login
+      @session = RedditBotService.new(self)
+    end
 end
