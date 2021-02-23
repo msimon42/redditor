@@ -43,8 +43,8 @@ class RedditBotService
       user_agent: 'RedditorMan:v1',
       client_id:  ENV['REDDIT_CLIENT_ID'],
       secret:     ENV['REDDIT_CLIENT_SECRET'],
-      username:   user.username,
-      password:   user.password
+      username:   @user.username,
+      password:   @user.password
       )
     @user_data = @session.user(@user.username)
   end
