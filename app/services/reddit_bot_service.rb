@@ -29,6 +29,10 @@ class RedditBotService
     @session.subreddit(sub).subscribe
   end
 
+  def user_score(user)
+
+  end  
+
   def reset(usr=nil)
     user = usr || @user
     @session = Redd.it(
