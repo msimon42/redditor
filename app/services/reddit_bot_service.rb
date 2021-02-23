@@ -38,7 +38,7 @@ class RedditBotService
   end
 
   def reset(usr=nil)
-    user = usr || @user
+    @user = usr || Bot.random
     @session = Redd.it(
       user_agent: 'RedditorMan:v1',
       client_id:  ENV['REDDIT_CLIENT_ID'],
@@ -46,5 +46,6 @@ class RedditBotService
       username:   user.username,
       password:   user.password
       )
+    @user_data = @session.user(@user.username)
   end
 end
