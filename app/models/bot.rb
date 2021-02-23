@@ -32,4 +32,8 @@ class Bot < ApplicationRecord
     update(link_karma: scores['link_karma'], comment_karma: scores['comment_karma'])
     return score
   end
+
+  def total_karma
+    return link_karma + comment_karma
+  end
 end
