@@ -15,8 +15,12 @@ class Bot < ApplicationRecord
 
   def self.mass_vote(dir, post)
     all.each do |bot|
-      bot.vote_by_fullname(self.submission_id, dir)
+      bot.vote_by_fullname(post, dir)
     end
+  end
+
+  def vote_by_fullname(post, dir)
+    @session.vote_by_fullname(post.submission_id, dir)
   end
 
   def update_score
