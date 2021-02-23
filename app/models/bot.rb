@@ -29,7 +29,7 @@ class Bot < ApplicationRecord
 
   def update_score
     scores = @session.user_score(self.username)
-    update(link_karma: scores['link_karma'], comment_karma: scores['comment_karma'])
+    update(link_karma: scores[:link_karma], comment_karma: scores[:comment_karma])
     return score
   end
 
