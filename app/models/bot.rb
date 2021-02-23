@@ -28,6 +28,8 @@ class Bot < ApplicationRecord
   end
 
   def update_score
-
-  end  
+    score = @session.user_score(self.username)
+    update(score: score)
+    return score
+  end
 end
