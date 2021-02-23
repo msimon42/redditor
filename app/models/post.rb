@@ -10,11 +10,7 @@ class Post < ApplicationRecord
   end
 
   def mass_vote(dir)
-    bots = Bot.all
-    bots.each do |bot|
-      session = bot.login
-      session.vote_by_fullname(self.submission_id, dir)
-    end
+    Bot.mass_vote(dir, self.submission_id)
   end
 
   def reply(text)
