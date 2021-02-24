@@ -27,6 +27,15 @@ class Bot < ApplicationRecord
     end
   end
 
+  def make_post(sub, post_data)
+    @session.make_post(
+      sub,
+      title: post_data[:title],
+      text: post_data[:text],
+      url: post_data[:url]
+    )
+  end
+
   def update_score
     scores = @session.user_score
     update(link_karma: scores[:link_karma], comment_karma: scores[:comment_karma])
