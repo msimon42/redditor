@@ -16,7 +16,7 @@ class Bot < ApplicationRecord
   def self.mass_vote(dir, post)
     all.each do |bot|
       bot.vote_by_fullname(post, dir)
-      sleep(60)
+      sleep(30)
     end
   end
 
