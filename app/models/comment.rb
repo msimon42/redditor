@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
     where.not(text: nil)
   end
 
-  def self.bot_post?
+  def self.bot_posts
     where(bot_post: true)
-  end  
+  end
 end
