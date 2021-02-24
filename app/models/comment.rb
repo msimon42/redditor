@@ -23,7 +23,9 @@ class Comment < ApplicationRecord
     where.not(text: nil)
   end
 
-  def self.bot_posts
-    where(bot_post: true)
+  def self.bot_posts(age)
+    where(["bot_post = :bot_post and created_at > :created_at",
+          {bot_post: true,
+          created_at: age.hours.ago}])
   end
 end
