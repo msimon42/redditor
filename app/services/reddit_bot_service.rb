@@ -22,8 +22,14 @@ class RedditBotService
     @session.from_ids(fullname).first.reply(text)
   end
 
-  def make_post(sub, **kwargs)
-    @session.subreddit(sub).submit(kwargs[:title], kwargs[:text], kwargs[:url])
+  def make_post(sub, post_data)
+    post = @session.subreddit(sub).submit(post_data[:title], text: post_data[:text], url: post_data[:url])
+    Post.create(
+      title: post_data[:title],
+      text: post_data[:text],
+      submission_id: post.name,
+      author: @user.username
+    )
   end
 
   def subscribe(sub)
