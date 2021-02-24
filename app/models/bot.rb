@@ -13,14 +13,14 @@ class Bot < ApplicationRecord
     @session.my_subreddits('subscriber').map{|s| s.display_name}
   end
 
-  def self.mass_vote(dir, post)
+  def self.mass_vote(dir, posts)
     all.each do |bot|
-      bot.vote_by_fullname(post, dir)
+      bot.vote_by_fullname(posts, dir)
       sleep(30)
     end
   end
 
-  def vote_by_fullname(post, dir)
+  def vote_by_fullname(posts, dir)
     @session.vote_by_fullname(post.submission_id, dir)
   end
 
