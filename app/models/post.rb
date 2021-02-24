@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   end
 
   def mass_vote(dir)
-    Bot.mass_vote(dir, self.submission_id)
+    Bot.mass_vote(dir, [self])
   end
 
   def reply(text)
@@ -19,5 +19,5 @@ class Post < ApplicationRecord
 
   def self.bot_post?
     where(bot_post: true)
-  end  
+  end
 end
