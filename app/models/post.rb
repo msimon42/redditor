@@ -16,4 +16,8 @@ class Post < ApplicationRecord
   def reply(text)
     RedditBotService.new.reply_to_submission(self.submission_id, text)
   end
+
+  def self.bot_post?
+    where(bot_post: true)
+  end  
 end

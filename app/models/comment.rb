@@ -22,4 +22,8 @@ class Comment < ApplicationRecord
   def self.not_nil
     where.not(text: nil)
   end
+
+  def self.bot_post?
+    where(bot_post: true)
+  end  
 end
