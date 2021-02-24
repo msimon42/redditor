@@ -28,7 +28,8 @@ class RedditBotService
       title: post_data[:title],
       text: post_data[:text],
       submission_id: post.name,
-      author: @user.username
+      author: @user.username,
+      bot_post: true
     )
   end
 
