@@ -15,7 +15,7 @@ class RedditBotService
   end
 
   def vote_by_fullname(fullname, dir)
-    @session.from_ids(fullname).to_ary[0].send(dir)
+    puts @session.from_ids(fullname).to_ary[0].send(dir)
   end
 
   def reply_to_submission(fullname, text)
@@ -23,13 +23,14 @@ class RedditBotService
   end
 
   def make_post(sub, post_data)
-    post = @session.subreddit(sub).submit(post_data[:title], text: post_data[:text], url: post_data[:url])
+    post = @session.subreddit(sub.name).submit(post_data[:title], text: post_data[:text], url: post_data[:url])
     Post.create(
       title: post_data[:title],
       text: post_data[:text],
       submission_id: post.name,
       author: @user.username,
-      bot_post: true
+      bot_post: true,
+      sub_id: sub.id
     )
   end
 

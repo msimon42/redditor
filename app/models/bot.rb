@@ -15,6 +15,7 @@ class Bot < ApplicationRecord
 
   def self.mass_vote(dir, posts)
     all.each do |bot|
+      puts "Loading #{bot}"
       bot.vote_by_fullname(posts, dir)
       sleep(15)
     end
@@ -22,6 +23,7 @@ class Bot < ApplicationRecord
 
   def vote_by_fullname(posts, dir)
     posts.each do |post|
+      puts "#{self} voting #{post}"
       @session.vote_by_fullname(post.submission_id, dir)
       sleep(2)
     end

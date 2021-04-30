@@ -18,7 +18,8 @@ class Post < ApplicationRecord
   end
 
   def self.bot_posts(age)
-    where(["bot_post = :bot_post and created_at > :created_at"], {bot_post: true,
-                                                                  created_at: age.hours.ago} )
+    where(["bot_post = :bot_post and created_at > :created_at",
+          {bot_post: true,
+          created_at: age.hours.ago}])
   end
 end
