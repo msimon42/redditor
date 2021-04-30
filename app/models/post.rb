@@ -10,10 +10,16 @@ class Post < ApplicationRecord
   end
 
   def mass_vote(dir)
-    Bot.mass_vote(dir, self.submission_id)
+    Bot.mass_vote(dir, [self])
   end
 
   def reply(text)
     RedditBotService.new.reply_to_submission(self.submission_id, text)
+  end
+
+  def self.bot_posts(age)
+    where(["bot_post = :bot_post and created_at > :created_at",
+          {bot_post: true,
+          created_at: age.hours.ago}])
   end
 end

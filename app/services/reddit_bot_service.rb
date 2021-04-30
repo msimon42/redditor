@@ -15,15 +15,23 @@ class RedditBotService
   end
 
   def vote_by_fullname(fullname, dir)
-    @session.from_ids(fullname).to_ary[0].send(dir)
+    puts @session.from_ids(fullname).to_ary[0].send(dir)
   end
 
   def reply_to_submission(fullname, text)
     @session.from_ids(fullname).first.reply(text)
   end
 
-  def make_post(sub, **kwargs)
-    @session.subreddit(sub).submit(kwargs[:title], kwargs[:text], kwargs[:url])
+  def make_post(sub, post_data)
+    post = @session.subreddit(sub.name).submit(post_data[:title], text: post_data[:text], url: post_data[:url])
+    Post.create(
+      title: post_data[:title],
+      text: post_data[:text],
+      submission_id: post.name,
+      author: @user.username,
+      bot_post: true,
+      sub_id: sub.id
+    )
   end
 
   def subscribe(sub)

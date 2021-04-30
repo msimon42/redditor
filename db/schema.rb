@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_23_171540) do
+ActiveRecord::Schema.define(version: 2021_03_03_023812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2021_02_23_171540) do
     t.string "user_agent"
     t.integer "comment_karma"
     t.integer "link_karma"
+    t.string "client_id"
+    t.string "client_secret"
   end
 
   create_table "buzzwords", force: :cascade do |t|

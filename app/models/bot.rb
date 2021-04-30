@@ -13,11 +13,29 @@ class Bot < ApplicationRecord
     @session.my_subreddits('subscriber').map{|s| s.display_name}
   end
 
-  def self.mass_vote(dir, post)
+  def self.mass_vote(dir, posts)
     all.each do |bot|
-      session = bot.login
-      session.vote_by_fullname(self.submission_id, dir)
+      puts "Loading #{bot}"
+      bot.vote_by_fullname(posts, dir)
+      sleep(15)
     end
+  end
+
+  def vote_by_fullname(posts, dir)
+    posts.each do |post|
+      puts "#{self} voting #{post}"
+      @session.vote_by_fullname(post.submission_id, dir)
+      sleep(2)
+    end
+  end
+
+  def make_post(sub, post_data)
+    @session.make_post(
+      sub,
+      title: post_data[:title],
+      text: post_data[:text],
+      url: post_data[:url]
+    )
   end
 
   def update_score
