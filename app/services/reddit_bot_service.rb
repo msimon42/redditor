@@ -5,8 +5,8 @@ class RedditBotService
     @user = user || Bot.random
     @session = Redd.it(
       user_agent: @user.user_agent,
-      client_id:  ENV['REDDIT_CLIENT_ID'],
-      secret:     ENV['REDDIT_CLIENT_SECRET'],
+      client_id:  @user.client_id,
+      secret:     @user.client_secret,
       username:   @user.username,
       password:   @user.password
       )
