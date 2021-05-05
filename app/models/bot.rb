@@ -1,5 +1,5 @@
 class Bot < ApplicationRecord
-  after_find :login
+  #after_find :login
 
   def self.random
     order('RANDOM()').first
@@ -14,10 +14,14 @@ class Bot < ApplicationRecord
   end
 
   def self.mass_vote(dir, posts)
+    v = VpnService.new
     all.each do |bot|
       puts "Loading #{bot}"
+      v.connect(VpnServer.random.address)
+      bot.login
       bot.vote_by_fullname(posts, dir)
       sleep(15)
+      v.disconnect
     end
   end
 
