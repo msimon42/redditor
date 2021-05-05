@@ -15,7 +15,7 @@ class VpnService
             APPLESCRIPT}
       )
 
-    return `Connected to #{address}`
+    return "Connected to #{address}"
   end
 
   def disconnect
@@ -36,6 +36,6 @@ class VpnService
     raise 'No connection exists' unless @address
     self.disconnect
     self.connect(address)
-    return `Connected to #{address}`
+    return "Connected to #{address}"
   end
 end
