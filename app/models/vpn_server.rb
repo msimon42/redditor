@@ -1,0 +1,2 @@
+class VpnServer < ApplicationRecord
+end
