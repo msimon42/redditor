@@ -20,7 +20,7 @@ class Bot < ApplicationRecord
       v.connect(VpnServer.random.address)
       bot.login
       bot.vote_by_fullname(posts, dir)
-      sleep(15)
+      sleep(30)
       v.disconnect
     end
   end
